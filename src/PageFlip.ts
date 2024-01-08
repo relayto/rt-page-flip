@@ -391,8 +391,7 @@ export class PageFlip extends EventObject {
             this.isUserTouch = false;
 
             if (!isSwipe) {
-                if (!this.isUserMove) this.flipController.flip(pos);
-                else this.flipController.stopMove();
+                if (this.isUserMove) this.flipController.stopMove();
             }
         }
     }
