@@ -37,8 +37,9 @@
   "scripts": {
     "eslint": "eslint . --ext .ts",
     "build-global": "npx webpack",
-    "build": "rollup -c",
-    "build-copy": "npm run build && cp -rv ./dist/* ../relayto-frontend/vendor/page-flip/node_modules/page-flip/dist"
+    "build": "NODE_ENV=prod rollup -c",
+    "build-dev": "NODE_ENV=dev rollup -c",
+    "build-copy": "npm run build-dev && cp -rv ./dist/* ../relayto-frontend/vendor/page-flip/node_modules/page-flip/dist"
   },
   "keywords": [
     "typescript",

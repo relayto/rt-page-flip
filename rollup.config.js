@@ -2,6 +2,10 @@ import typescript from 'rollup-plugin-typescript2';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 
+const shouldMinify = !(process.env.NODE_ENV == 'dev');
+
+console.log( 'shouldMinify', shouldMinify );
+
 export default [
     {
         input: 'src/PageFlip.ts',
@@ -9,7 +13,8 @@ export default [
         plugins: [
             postcss(),
             typescript({ tsconfig: 'tsconfig.json', useTsconfigDeclarationDir: true }),
-            terser(),
+            // Only use terser if shouldMinify is true
+            ...shouldMinify ? [terser()] : [],
         ],
     },
     {
@@ -18,7 +23,8 @@ export default [
         plugins: [
             postcss(),
             typescript({ tsconfig: 'tsconfig.json', useTsconfigDeclarationDir: true }),
-            terser(),
+            // Only use terser if shouldMinify is true
+            ...shouldMinify ? [terser()] : [],
         ],
     },
 ];
